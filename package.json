@@ -1,7 +1,9 @@
 {
   "name": "wizards-in-react",
+  "author": "Sahil Prajapati",
   "version": "0.1.0",
-  "private": true,
+  "private": false,
+  "license": "MIT",
   "dependencies": {
     "classnames": "^2.2.6",
     "furtive": "^2.4.0",
@@ -15,6 +17,7 @@
     "react-scripts": "1.1.4",
     "redux": "^4.0.0"
   },
+  "homepage" : "https://github.com/sahil290791/navigating-wizards-with-react",
   "scripts": {
     "build-css": "node-sass-chokidar src/ -o src/",
     "watch-css": "npm run build-css && node-sass-chokidar src/ -o src/ --watch --recursive",
