@@ -2,7 +2,9 @@ import React, { Component } from 'react';
 import {
   Route,
   Switch,
-} from 'react-router-dom'
+} from 'react-router-dom';
+
+import { connect } from 'react-redux';
 
 import ProfileWizard from './components/profile/ProfileWizard';
 import Home from './components/Home';

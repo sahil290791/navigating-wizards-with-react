@@ -1,59 +1,72 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
+import Navigation from '../../helpers/Navigation';
 import {
-  USER_DETAILS_SCREEN,
-  SOCIAL_DETAILS_CAPTURE_SCREEN,
-  HOBBIES_SCREEN,
-  COLLEGE_DETAILS_SCREEN,
+  SCREEN_A,
+  SCREEN_B,
+  SCREEN_C
 } from '../../constants';
-import UserDetailsScreen from './UserDetailsScreen';
+
+import ScreenA from '../../containers/ScreenA';
+import ScreenB from '../../containers/ScreenB';
+import ScreenC from '../../containers/ScreenC';
 
 class ProfileWizard extends Component {
-  state = {
-    step: USER_DETAILS_SCREEN,
+  constructor(props) {
+    super(props);
+    this.state = {
+      currentStep: 'SCREEN_A',
+      wizardBackEnabled: true,
+    };
+  }
+
+  componentWillMount() {
+    Navigation.init({
+      navigation: this.props.history,
+      currentStep: this.state.currentStep,
+      browserBackEnabled: !this.state.wizardBackEnabled,
+    });
+  }
+
+  componentWillReceiveProps(nextProps) {
+    this.setState({
+      currentStep: nextProps.currentStep,
+      wizardBackEnabled: nextProps.wizardBackEnabled,
+    });
+  }
+
+  componentWillUnmount() {
+    console.log('unmounting');
   }
 
   render() {
-    const { step } = this.state;
-    let currentStep = null;
-    switch(step) {
-      case USER_DETAILS_SCREEN:
-        currentStep = <UserDetailsScreen />;
+    const { currentStep, wizardBackEnabled } = this.state;
+    let step = null;
+    switch(currentStep) {
+      case SCREEN_A:
+        step = <ScreenA currentStep={currentStep} navigation={Navigation} wizardBackEnabled={wizardBackEnabled} />;
         break;
 
-      case SOCIAL_DETAILS_CAPTURE_SCREEN:
-        currentStep = (
-          <div>
-            <div>
-              <strong>Hey!!</strong>
-            </div>
-          </div>
-        );
+      case SCREEN_B:
+        step = <ScreenB currentStep={currentStep} navigation={Navigation} wizardBackEnabled={wizardBackEnabled} />;
         break;
 
-      case HOBBIES_SCREEN:
-        currentStep = (
-          <div>
-            <div>
-              <strong>Hey!!</strong>
-            </div>
-          </div>
-        );
-        break;
-
-      case COLLEGE_DETAILS_SCREEN:
-        currentStep = (
-          <div>
-            <div>
-              <strong>Hey!!</strong>
-            </div>
-          </div>
-        );
+      case SCREEN_C:
+        step = <ScreenC currentStep={currentStep} navigation={Navigation} wizardBackEnabled={wizardBackEnabled} />;
         break;
 
     }
-    return currentStep;
+    return step;
   }
 };
 
-export default ProfileWizard;
+const mapStateToProps = (state) => {
+  const { navigation } = state;
+  return {
+    currentStep: navigation.currentStep,
+    wizardBackEnabled: navigation.wizardBackEnabled,
+  };
+}
+
+export default connect(mapStateToProps)(ProfileWizard);

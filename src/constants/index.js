@@ -1,11 +1,9 @@
-const USER_DETAILS_SCREEN = 'user_details_screen';
-const COLLEGE_DETAILS_SCREEN = 'college_details_screen';
-const HOBBIES_SCREEN = 'hobbies_screen';
-const SOCIAL_DETAILS_CAPTURE_SCREEN = 'social_details_capture_screen';
+const SCREEN_A = 'SCREEN_A';
+const SCREEN_B = 'SCREEN_B';
+const SCREEN_C = 'SCREEN_C';
 
 export {
-  USER_DETAILS_SCREEN,
-  SOCIAL_DETAILS_CAPTURE_SCREEN,
-  HOBBIES_SCREEN,
-  COLLEGE_DETAILS_SCREEN,
+  SCREEN_A,
+  SCREEN_B,
+  SCREEN_C,
 }

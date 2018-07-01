@@ -5,10 +5,12 @@ import {
 
 const Home = () => {
   return (
-    <div>
-      <Link to={'my_profile'}>
-        Click here to complete your profile
-      </Link>
+    <div className='grd grd-row'>
+      <div className='grd-row-col-6 p2'>
+        <Link to={'my_profile'} className='btn btn--blue'>
+          Start navigating with wizards
+        </Link>
+      </div>
     </div>
   );
 }
