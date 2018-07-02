@@ -1,18 +1,18 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import Navigation from '../../helpers/Navigation';
+import Navigation from '../helpers/Navigation';
 import {
   SCREEN_A,
   SCREEN_B,
   SCREEN_C
-} from '../../constants';
+} from '../constants';
 
-import ScreenA from '../../containers/ScreenA';
-import ScreenB from '../../containers/ScreenB';
-import ScreenC from '../../containers/ScreenC';
+import ScreenA from '../containers/ScreenA';
+import ScreenB from '../containers/ScreenB';
+import ScreenC from '../containers/ScreenC';
 
-class ProfileWizard extends Component {
+class Wizard extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -69,4 +69,4 @@ const mapStateToProps = (state) => {
   };
 }
 
-export default connect(mapStateToProps)(ProfileWizard);
+export default connect(mapStateToProps)(Wizard);

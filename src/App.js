@@ -6,7 +6,7 @@ import {
 
 import { connect } from 'react-redux';
 
-import ProfileWizard from './components/profile/ProfileWizard';
+import Wizard from './components/Wizard';
 import Home from './components/Home';
 import logo from './logo.svg';
 import './App.css';
@@ -20,7 +20,7 @@ class App extends Component {
         </header>
         <Switch>
           <Route exact path="/" component={Home} />
-          <Route exact path="/my_profile" component={ProfileWizard} />
+          <Route exact path="/wizard-demo" component={Wizard} />
         </Switch>
       </div>
     );
