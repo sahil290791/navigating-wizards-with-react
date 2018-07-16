@@ -30,7 +30,7 @@ const Screen = (props) => {
 
   return (
     <div className='grd-row'>
-      <div className='grd center bg--off-white p1'>
+      <div className='grd bg--off-white p1 center grd-row-col-6--sm grd-row-col-3-6--md'>
         <div className='grd-row'>
           <h3 className='grd-row-col-6 txt--center'>{ currentStep }</h3>
         </div>
@@ -46,7 +46,7 @@ const Screen = (props) => {
                 wizardBackEnabled ?
                 props.navigation.disableWizardBack() :
                 props.navigation.enableWizardBack();
-                dispatch(dummyDispatch());
+                dispatch(dummyDispatch(props.navigation));
               }}>{
                 wizardBackEnabled ? `Disable Wizard back` :
                 `Enable wizard back`
@@ -60,7 +60,7 @@ const Screen = (props) => {
               onClick={() => {
                 if (props.popStep) {
                   props.popStep({
-                    cb: () => dispatch(popStep())
+                    cb: () => dispatch(popStep(props.navigation))
                   })
                 }
               }}>Back</button>
@@ -71,7 +71,7 @@ const Screen = (props) => {
               disabled={!props.pushStep}
               onClick={() => {
                 props.pushStep({
-                  cb: () => dispatch(pushStep())
+                  cb: () => dispatch(pushStep(props.navigation))
                 })
               }}>Next</button>
           </div>

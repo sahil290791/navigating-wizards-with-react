@@ -5,8 +5,8 @@ import { SCREEN_B } from '../constants';
 const mapDispatchToProps = (dispatch, ownProps) => {
   console.log(ownProps);
   return {
-    pushStep: (options) => ownProps.navigation.push(SCREEN_B, options),
-    popStep: (options) => ownProps.navigation.pop(options),
+    pushStep: (options) => ownProps.navigation.navigate(SCREEN_B, options),
+    popStep: (options) => ownProps.navigation.goBack(options),
     dispatch,
   };
 };

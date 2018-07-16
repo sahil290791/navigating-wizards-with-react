@@ -22,11 +22,11 @@ class Wizard extends Component {
   }
 
   componentWillMount() {
-    Navigation.init({
+    this.navigation = new Navigation({
       navigation: this.props.history,
       currentStep: this.state.currentStep,
       browserBackEnabled: !this.state.wizardBackEnabled,
-    });
+    })
   }
 
   componentWillReceiveProps(nextProps) {
@@ -36,24 +36,20 @@ class Wizard extends Component {
     });
   }
 
-  componentWillUnmount() {
-    console.log('unmounting');
-  }
-
   render() {
     const { currentStep, wizardBackEnabled } = this.state;
     let step = null;
     switch(currentStep) {
       case SCREEN_A:
-        step = <ScreenA currentStep={currentStep} navigation={Navigation} wizardBackEnabled={wizardBackEnabled} />;
+        step = <ScreenA currentStep={currentStep} navigation={this.navigation} wizardBackEnabled={wizardBackEnabled} />;
         break;
 
       case SCREEN_B:
-        step = <ScreenB currentStep={currentStep} navigation={Navigation} wizardBackEnabled={wizardBackEnabled} />;
+        step = <ScreenB currentStep={currentStep} navigation={this.navigation} wizardBackEnabled={wizardBackEnabled} />;
         break;
 
       case SCREEN_C:
-        step = <ScreenC currentStep={currentStep} navigation={Navigation} wizardBackEnabled={wizardBackEnabled} />;
+        step = <ScreenC currentStep={currentStep} navigation={this.navigation} wizardBackEnabled={wizardBackEnabled} />;
         break;
 
     }

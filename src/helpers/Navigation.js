@@ -1,5 +1,13 @@
-const Navigation = {
-  init(initData) {
+class Navigation {
+  static currentStep(navigation) {
+    return navigation._currentStep;
+  }
+
+  static isWizardBackEnabled(navigation) {
+    return !navigation._browserBackEnabled;
+  }
+
+  constructor(initData) {
     const { navigation, currentStep = null, browserBackEnabled = false } = initData;
     this._navigation = navigation;
     this._browserBackEnabled = browserBackEnabled;
@@ -9,9 +17,9 @@ const Navigation = {
       this._steps = [];
     }
     this._currentStep = currentStep;
-  },
+  }
 
-  push(step, { skipStep = false, cb = null }) {
+  navigate(step, { skipStep = false, cb = null }) {
     this.changeStep(step);
     if (!skipStep) {
       this._steps.push(step);
@@ -19,9 +27,9 @@ const Navigation = {
         cb();
       }
     }
-  },
+  }
 
-  pop({ cb = null }) {
+  goBack({ cb = null }) {
     if (this._browserBackEnabled) {
       this._navigation.goBack();
     } else {
@@ -37,27 +45,19 @@ const Navigation = {
         this._navigation.goBack();
       }
     }
-  },
+  }
 
   changeStep(step) {
     this._currentStep = step;
-  },
-
-  currentStep() {
-    return this._currentStep;
-  },
+  }
 
   enableWizardBack(action) {
     this._browserBackEnabled = false;
-  },
+  }
 
   disableWizardBack() {
     // exits wizard if user presses back
     this._browserBackEnabled = true;
-  },
-
-  isWizardBackEnabled() {
-    return !this._browserBackEnabled;
   }
 };
 

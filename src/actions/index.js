@@ -1,11 +1,14 @@
-export const pushStep = () => ({
+export const pushStep = (navigation) => ({
   type: 'PUSH_STEP',
+  navigation,
 });
 
-export const popStep = () => ({
+export const popStep = (navigation) => ({
   type: 'POP_STEP',
+  navigation,
 });
 
-export const dummyDispatch = () => ({
+export const dummyDispatch = (navigation) => ({
   type: 'DUMMY_DISPATCH',
+  navigation,
 });

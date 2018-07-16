@@ -7,26 +7,27 @@ const defaultState = {
 
 const ProfileReducer = (state = defaultState, action) => {
   switch (action.type) {
-    case 'PUSH_STEP': {
+    case 'PUSH_STEP':
       return Object.assign({}, state, {
-        currentStep: Navigation.currentStep(),
-        wizardBackEnabled: Navigation.isWizardBackEnabled(),
+        currentStep: Navigation.currentStep(action.navigation),
+        wizardBackEnabled: Navigation.isWizardBackEnabled(action.navigation),
       });
-      break;
-    }
 
     case 'POP_STEP':
       return Object.assign({}, state, {
-        currentStep: Navigation.currentStep(),
-        wizardBackEnabled: Navigation.isWizardBackEnabled(),
+        currentStep: Navigation.currentStep(action.navigation),
+        wizardBackEnabled: Navigation.isWizardBackEnabled(action.navigation),
+      });
+
+    case 'DUMMY_DISPATCH':
+      return Object.assign({}, state, {
+        currentStep: Navigation.currentStep(action.navigation),
+        wizardBackEnabled: Navigation.isWizardBackEnabled(action.navigation),
       });
 
     default:
-      return Object.assign({}, state, {
-        currentStep: Navigation.currentStep(),
-        wizardBackEnabled: Navigation.isWizardBackEnabled(),
-      });
+      return state;
   }
 };
 
-export default ProfileReducer
+export default ProfileReducer;
