@@ -1,19 +1,21 @@
 class Navigation {
   static currentStep(navigation) {
-    return navigation._currentStep;
+    const index = navigation._steps.length - 1;
+    return navigation._steps[index];
   }
 
-  static isWizardBackEnabled(navigation) {
-    return !navigation._browserBackEnabled;
+  static isEmpty(navigation) {
+    return navigation._steps.length < 2;
   }
 
-  constructor(initData) {
-    const { navigation, currentStep = null, browserBackEnabled = false } = initData;
+  constructor(data) {
+    const { navigation, currentStep = null, browserBackEnabled = false } = data;
     this._navigation = navigation;
     this._browserBackEnabled = browserBackEnabled;
     if (currentStep) {
       this._steps = [currentStep];
     } else {
+      // initialize with a currentStep
       this._steps = [];
     }
     this._currentStep = currentStep;
@@ -23,27 +25,21 @@ class Navigation {
     this.changeStep(step);
     if (!skipStep) {
       this._steps.push(step);
-      if (cb) {
-        cb();
-      }
+    }
+    if (cb) {
+      cb();
     }
   }
 
   goBack({ cb = null }) {
-    if (this._browserBackEnabled) {
+    if (this._browserBackEnabled || Navigation.isEmpty(this)) {
       this._navigation.goBack();
     } else {
       this._steps.pop();
-      const index = this._steps.length - 1;
-      if (index > -1) {
-        this.changeStep(this._steps[index]);
-        if (cb) {
-          cb();
-        }
-      } else {
-        // browser back
-        this._navigation.goBack();
-      }
+      this.changeStep(Navigation.currentStep(this));
+    }
+    if (cb) {
+      cb();
     }
   }
 
@@ -58,6 +54,14 @@ class Navigation {
   disableWizardBack() {
     // exits wizard if user presses back
     this._browserBackEnabled = true;
+  }
+
+  isWizardBackEnabled() {
+    return !this._browserBackEnabled;
+  }
+
+  get currentStep() {
+    return this._currentStep;
   }
 };
 

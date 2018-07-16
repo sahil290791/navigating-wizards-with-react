@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux';
-import navigationReducer from './NavigationReducer';
+import WizardReducer from './WizardReducer';
 
 export default combineReducers({
-  navigation: navigationReducer
+  navigation: WizardReducer
 });
