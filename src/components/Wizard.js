@@ -13,26 +13,23 @@ import ScreenB from '../containers/ScreenB';
 import ScreenC from '../containers/ScreenC';
 
 class Wizard extends Component {
+  static getDerivedStateFromProps(nextProps, prevState) {
+    return {
+      ...prevState,
+      ...nextProps
+    };
+  }
+
   constructor(props) {
     super(props);
     this.state = {
       currentStep: 'SCREEN_A',
       wizardBackEnabled: true,
     };
-  }
-
-  componentWillMount() {
     this.navigation = new Navigation({
       navigation: this.props.history,
       currentStep: this.state.currentStep,
       browserBackEnabled: !this.state.wizardBackEnabled,
-    })
-  }
-
-  componentWillReceiveProps(nextProps) {
-    this.setState({
-      currentStep: nextProps.currentStep,
-      wizardBackEnabled: nextProps.wizardBackEnabled,
     });
   }
 
