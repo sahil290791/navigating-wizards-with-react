@@ -16,6 +16,16 @@
   font-size: large;
 }
 
+.back-button {
+  color: #222222;
+  font-size: 20px;
+  vertical-align: middle;
+  margin-bottom: 9px;
+  display: inline-block;
+  padding-right: 10px;
+  cursor: pointer;
+}
+
 @keyframes App-logo-spin {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }

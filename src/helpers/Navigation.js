@@ -39,6 +39,8 @@ class Navigation {
       this._steps.pop();
       this.changeStep(Navigation.currentStep(this));
     }
+
+    // Execute callbacks if any?
     if (cb) {
       cb();
     }

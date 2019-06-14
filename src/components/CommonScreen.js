@@ -1,6 +1,9 @@
 import React from 'react';
 import classnames from 'classnames';
 
+import Footer from './Footer';
+import Header from './Header';
+
 const getScreenName = (path) => {
   return path.split('/')[2].toUpperCase();
 };
@@ -35,30 +38,16 @@ const ScreenA = (props) => {
   return (
     <div className="grd-row">
       <div className="grd bg--off-white p1 center grd-row-col-6--sm grd-row-col-3-6--md">
-        <div className="grd-row">
-          <h3 className="grd-row-col-6 txt--center">
-            Screen {screenName}
-          </h3>
-        </div>
+        <Header
+          title={`Screen ${screenName}`}
+          onClick={history.goBack}
+        />
         <div className="grd-row p2">
-          <div className="grd-row-col-3-6">
-            <button
-              type="button"
-              className="btn brdr--rounded"
-              onClick={history.goBack}
-            >
-              Back
-            </button>
-          </div>
-          <div className="grd-row-col-3-6">
-            <button
-              type="button"
-              className={enabledButtonClass}
-              onClick={() => history.push(`/screen/${nextScreenMapping[screenName] || 'A'}`)}
-            >
-              Next
-            </button>
-          </div>
+          <Footer
+            label="Next"
+            enabledButtonClass={enabledButtonClass}
+            onClick={() => history.push(`/screen/${nextScreenMapping[screenName] || 'A'}`)}
+          />
         </div>
       </div>
     </div>

@@ -2,7 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
 
-import { pushStep, popStep, dummyDispatch } from '../actions';
+import { push, pop, dummyDispatch } from '../actions';
+import Header from './Header';
+import Footer from './Footer';
 
 const navigationToggleText = (wizardBackEnabled) => {
   return wizardBackEnabled ? `Disable Wizard back` :
@@ -15,14 +17,14 @@ const wizardBackButtonInfoText = (wizardBackEnabled) => {
   ) : (
     <p className>Enabling wizard's back<strong> gives the control to </strong>our navigation layer</p>
   );
-}
+};
 
 const Screen = (props) => {
-  const { currentStep, dispatch, wizardBackEnabled } = props;
+  const { currentStep, dispatch, wizardBackEnabled, navigation, popStep, pushStep } = props;
   const enabledButtonClass = classnames({
     'btn brdr--rounded': true,
-    'btn--green': !!props.pushStep,
-    'btn--gray': !props.pushStep,
+    'btn--green': !!pushStep,
+    'btn--gray': !pushStep,
   });
 
   const wizardBackToggleClass = classnames({
@@ -44,9 +46,16 @@ const Screen = (props) => {
   return (
     <div className='grd-row'>
       <div className='grd bg--off-white p1 center grd-row-col-6--sm grd-row-col-3-6--md'>
-        <div className='grd-row'>
-          <h3 className='grd-row-col-6 txt--center'>{currentStep}</h3>
-        </div>
+        <Header
+          title={currentStep}
+          onClick={() => {
+            if (popStep) {
+              popStep({
+                cb: () => dispatch(pop(navigation))
+              })
+            }
+          }}
+        />
         <div className={screenA}>
           <p className='grd-row-col-6 txt--center'>On first screen pressing back exits the wizard</p>
         </div>
@@ -59,32 +68,21 @@ const Screen = (props) => {
                 wizardBackEnabled ?
                 props.navigation.disableWizardBack() :
                 props.navigation.enableWizardBack();
-                dispatch(dummyDispatch(props.navigation));
+                dispatch(dummyDispatch(navigation));
               }}>{navigationToggleText(wizardBackEnabled)}</button>
           </div>
         </div>
         <div className='grd-row p2'>
-          <div className='grd-row-col-3-6'>
-            <button
-              className='btn brdr--rounded'
-              onClick={() => {
-                if (props.popStep) {
-                  props.popStep({
-                    cb: () => dispatch(popStep(props.navigation))
-                  })
-                }
-              }}>Back</button>
-          </div>
-          <div className='grd-row-col-3-6'>
-            <button
-              className={enabledButtonClass}
-              disabled={!props.pushStep}
-              onClick={() => {
-                props.pushStep({
-                  cb: () => dispatch(pushStep(props.navigation))
-                })
-              }}>Next</button>
-          </div>
+          <Footer
+            label="Next"
+            enabledButtonClass={enabledButtonClass}
+            disabled={!props.pushStep}
+            onClick={() => {
+              props.pushStep({
+                cb: () => dispatch(push(props.navigation))
+              })
+            }}
+          />
         </div>
       </div>
     </div>

@@ -1,9 +1,9 @@
-export const pushStep = (navigation) => ({
+export const push = (navigation) => ({
   type: 'PUSH_STEP',
   navigation,
 });
 
-export const popStep = (navigation) => ({
+export const pop = (navigation) => ({
   type: 'POP_STEP',
   navigation,
 });

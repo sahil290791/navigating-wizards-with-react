@@ -5,7 +5,7 @@ import Navigation from '../helpers/Navigation';
 import {
   SCREEN_A,
   SCREEN_B,
-  SCREEN_C
+  SCREEN_C,
 } from '../constants';
 
 import ScreenA from '../containers/ScreenA';
@@ -16,7 +16,7 @@ class Wizard extends Component {
   static getDerivedStateFromProps(nextProps, prevState) {
     return {
       ...prevState,
-      ...nextProps
+      ...nextProps,
     };
   }
 
@@ -60,6 +60,6 @@ const mapStateToProps = (state) => {
     currentStep: navigation.currentStep,
     wizardBackEnabled: navigation.wizardBackEnabled,
   };
-}
+};
 
 export default connect(mapStateToProps)(Wizard);
