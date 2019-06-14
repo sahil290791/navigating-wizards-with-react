@@ -15,12 +15,12 @@ class Navigation {
     if (currentStep) {
       this._steps = [currentStep];
     } else {
-      // initialize with a currentStep
       this._steps = [];
     }
     this._currentStep = currentStep;
   }
 
+  // go to a step
   navigate(step, { skipStep = false, cb = null }) {
     this.changeStep(step);
     if (!skipStep) {
@@ -31,6 +31,7 @@ class Navigation {
     }
   }
 
+  // go back to a step
   goBack({ cb = null }) {
     if (this._browserBackEnabled || Navigation.isEmpty(this)) {
       this._navigation.goBack();
@@ -47,10 +48,12 @@ class Navigation {
     this._currentStep = step;
   }
 
+  // disable browser back
   enableWizardBack(action) {
     this._browserBackEnabled = false;
   }
 
+  // enable browser back
   disableWizardBack() {
     // exits wizard if user presses back
     this._browserBackEnabled = true;
